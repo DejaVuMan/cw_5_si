@@ -1,3 +1,7 @@
+import DecisionTree.*;
+
+import java.util.List;
+
 public class Driver {
 
     public static void main(String[] args){
@@ -17,7 +21,20 @@ public class Driver {
         System.out.println(perceptron.Output(new double[]{0,0}));
 
         // Classification Tree
+        DecisionTree tree = new DecisionTree();
 
+        try{
+            tree.setAttributes(new String[]{"a1", "a2", "a3"})
+                    .addExample(new String[]{"True", "False", "False"}, false)
+                    .addExample(new String[]{"True", "False", "True"}, false)
+                    .addExample(new String[]{"False", "True", "False"}, false)
+                    .addExample(new String[]{"True", "True", "True"}, true)
+                    .addExample(new String[]{"True", "True", "False"}, true);
+        } catch(UnknownDecisionException e){
+            System.out.println(e.getMessage());
+        }
+        tree.compile();
+
+        System.out.println(tree.getRoot());
     }
-
 }
